@@ -6,6 +6,10 @@ import json
 
 '''
 io500 Input/Output test
+
+The 'settings.json' file contains the configurations of the particular io500 tests,
+including the number of processors to use. All file size units are in GiB and aggregated 
+over all processors. Both ior and metadata tests are performed.
 '''
 
 @rfm.simple_test
@@ -19,17 +23,12 @@ class io500(rfm.RegressionTest):
     #settings=parameter(["settings_rdfaas.yaml"])
     
     def __init__(self,**kwds):
-
+        
         super().__init__()
 
-        with open(self.settings) as f:
-            self.settings_json=json.load(f)
-        
+       
 
         self.executable_opts = ['config.ini']
-        self.num_tasks = self.settings_json["nProcessors"]
-        self.num_tasks_per_node = 36
-        self.num_cpus_per_task = 1
 
         self.env_vars = {"OMP_NUM_THREADS": str(self.num_cpus_per_task)}
 
@@ -38,7 +37,7 @@ class io500(rfm.RegressionTest):
         self.build_system = 'Make'
         #self.build_system.ftn="ftn"
         self.modules = [ "openmpi" ,"python/3.9.13","gcc"]
-        self.executable="io500"
+        self.executable="io500/io500"
         self.prerun_cmds  = ['source generate_config.sh']
 
         def extract_perf(name):
@@ -70,7 +69,13 @@ class io500(rfm.RegressionTest):
 
     @run_before('run')
     def setup_run(self):
-        pass
+
+        with open(os.path.join(self.stagedir,self.settings)) as f:
+            self.settings_json=json.load(f)
+        self.num_tasks = self.settings_json["nProcessors"]
+        self.num_tasks_per_node = 36
+        self.num_cpus_per_task = 1
+        
 
     @sanity_function
     def assert_io500(self):

@@ -1,28 +1,28 @@
 
 {
-  "results": "/work/z04/shared/lparisi/io500",
-  "dataDir": "/work/z04/shared/lparisi/io500/dataDir",
+  "results": "/work/z04/shared/reframe_io/results",
+  "dataDir": "/work/z04/shared/reframe_io/dataDir_unstriped",
   "nProcessors": 36,
   "mdtest":
   {
     "easy":
     {
-      "nFiles": 300
+      "nFiles": 300000
     },
     "hard":
     {
-      "nFiles": 100
+      "nFiles": 100000
     }    
   },
 "ior":
 {
   "easy":
   {
-    "fileSize": 4
+    "fileSize": 400
   },
   "hard":
     {
-    "fileSize": 4
+    "fileSize": 300
     }
 }
 
