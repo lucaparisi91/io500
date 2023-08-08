@@ -1,0 +1,30 @@
+
+{
+  "results": "/work/z04/shared/lparisi/io500",
+  "dataDir": "/work/z04/shared/lparisi/io500/dataDir",
+  "nProcessors": 36,
+  "mdtest":
+  {
+    "easy":
+    {
+      "nFiles": 300
+    },
+    "hard":
+    {
+      "nFiles": 100
+    }    
+  },
+"ior":
+{
+  "easy":
+  {
+    "fileSize": 4
+  },
+  "hard":
+    {
+    "fileSize": 4
+    }
+}
+
+}
+
